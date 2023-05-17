@@ -3,11 +3,7 @@ stop:document.querySelector('[data-stop]'),
 body:document.querySelector('body')
 }
 let timerId = null;
-// refs.stop.disabled = true;
-// refs.start.disabled = true;
-function startBtnDisable(){
-   
-}
+
 refs.start.addEventListener('click',()=>{timerId = setInterval(addBodyColor, 1000)} );
 
 function addBodyColor(){
