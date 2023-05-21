@@ -2,9 +2,9 @@
 import { Notify } from 'notiflix';
 
 const form=document.querySelector('form')
-const amountInput=document.querySelector('[amount]')
-const delayInput =document.querySelector('[delay]')
-const stepInput=document.querySelector('[step]')
+const amountInput=document.querySelector('[name="amount"]')
+const delayInput =document.querySelector('[name="delay"]')
+const stepInput=document.querySelector('[name="step"]')
 const btnCreate=document.querySelector('button')
 
 
@@ -26,24 +26,32 @@ return new Promise((resolve, reject)=> {
 
 function submitForm (evt){
   evt.preventDefault();
-// const amount = Number(amountInput.value);
-// const delay = Number(delayInput.value);
-// const step = Number(stepInput.value);
-  createPromise()
-.then(({ position, delay }) => {
-    console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
-  })
-  .catch(({ position, delay }) => {
-    console.log(`❌ Rejected promise ${position} in ${delay}ms`);
-  });
+  btnCreate.disabled=true;
+const amount = Number(amountInput.value);
+const delay = Number(delayInput.value);
+const step = Number(stepInput.value);
+  if(amount<0 || delay<0 || step<0 ){Notify.warning(
+    `Enter number more than 0`
+  )}
+  
+  else if(Number(amount) === 0) {
+    Notify.warning(`Enter number more than 0`);
+  } 
+  
+  else{
+    for (let i = 1; i <= amount; i++) {
+
+      createPromise(i, delay + step * i)
+        .then(({ position, delay }) => {
+          Notify.success(`✅ Fulfilled promise ${position + 1} in ${delay}ms`);
+        })
+        .catch(({ position, delay }) => {
+          Notify.failure(`❌ Rejected promise ${position + 1} in ${delay}ms`);
+        });
+    }
+  };
 }
-// function createPromise(2, 1500)
-//   .then(({ position, delay }) => {
-//     console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
-//   })
-//   .catch(({ position, delay }) => {
-//     console.log(`❌ Rejected promise ${position} in ${delay}ms`);
-//   });
+
 
 
 
