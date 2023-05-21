@@ -25,8 +25,8 @@ return new Promise((resolve, reject)=> {
 });}
 
 function submitForm (evt){
-  evt.preventDefault();
-  btnCreate.disabled=true;
+  evt.preventDefault();  
+
 const amount = Number(amountInput.value);
 const delay = Number(delayInput.value);
 const step = Number(stepInput.value);
@@ -39,7 +39,7 @@ const step = Number(stepInput.value);
   } 
   
   else{
-    for (let i = 1; i <= amount; i++) {
+    for (let i = 0; i <= amount; i++) {
 
       createPromise(i, delay + step * i)
         .then(({ position, delay }) => {
@@ -50,8 +50,11 @@ const step = Number(stepInput.value);
         });
     }
   };
+  // btnCreate.disabled=true;
+form.reset()
 }
 
+  // /location.reload();
 
 
 
