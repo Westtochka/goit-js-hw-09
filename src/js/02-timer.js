@@ -58,8 +58,9 @@ function createInterfaceTimer({daysRemaining, hoursRemaining, minutesRemaining, 
     clearInterval(timerId);
     startBtn.disabled = false;
     inputDate.disabled = false;
+    console.log(differTime)
     return;
-  }
+  }console.log(differTime)
     daysTimer.textContent=`${daysRemaining}`;
     hoursTimer.textContent=`${hoursRemaining}`;
     minutesTimer.textContent=`${minutesRemaining}`;
