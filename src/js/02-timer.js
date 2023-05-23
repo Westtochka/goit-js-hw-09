@@ -13,12 +13,7 @@ let timerId;//нужен для очистки интервала
 let inputCurrentDate=null;// будет равен дате, которую вібрали в инпуте
 let differTime = null;//разница между вводом и настоящей датой
 
-
-
 startBtn.disabled = true;
-
-// const targetDate=new Date (inputDate.value)  //дата в инпуте
-// console.log(inputDate.value)
 
 const options = {
   enableTime: true,
@@ -50,17 +45,16 @@ const currentData=Date.now()//дата, которая сейчас
 const differTime = inputCurrentDate - currentData;//разница между выбранной пользователем датой и между датой сейчас 
 const time=convertMs(differTime)
 createInterfaceTimer(time)// передаем данные для замещения их в тексконтент и отображении на экране
-}, 1000);
+if(differTime< 1000){//если разница  <1000 мили секунд!!!, Т.Е. НУЖНО ОСТАНОВИТЬ СЧЕТЧИК      с минусом, то время в прошлом и удаляем по ид сет интервалб делаем кнопки и поле инпута неактивными
+  clearInterval(timerId);
+  startBtn.disabled = false;
+  inputDate.disabled = false;
+  console.log(differTime)
+  return;
+}}, 1000);
 }
 //эта функция или блокирует или передает данные на экран в текстконтент
-function createInterfaceTimer({daysRemaining, hoursRemaining, minutesRemaining, secondsRemaining}, differTime){
-  if(differTime< 0 || 0){//если разница  В НОЛЬ, Т.Е. НУЖНО ОСТАНОВИТЬ СЧЕТЧИК      с минусом, то время в прошлом и удаляем по ид сет интервалб делаем кнопки и поле инпута неактивными
-    clearInterval(timerId);
-    startBtn.disabled = false;
-    inputDate.disabled = false;
-    console.log(differTime)
-    return;
-  }console.log(differTime)
+function createInterfaceTimer({daysRemaining, hoursRemaining, minutesRemaining, secondsRemaining}){
     daysTimer.textContent=`${daysRemaining}`;
     hoursTimer.textContent=`${hoursRemaining}`;
     minutesTimer.textContent=`${minutesRemaining}`;
@@ -91,8 +85,4 @@ return {daysRemaining,hoursRemaining, minutesRemaining, secondsRemaining};
 };
 
 
-// function countdownTimer(){
-//   if (differTime <= 0) {
-//     clearInterval(timerId);
-//   }}
   
