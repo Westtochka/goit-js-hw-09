@@ -9,8 +9,6 @@ const btnCreate=document.querySelector('button')
 
 
 form.addEventListener('submit',submitForm)
-let position =0;
-
 
 function createPromise(position, delay){
 return new Promise((resolve, reject)=> {
@@ -50,11 +48,9 @@ const step = Number(stepInput.value);
         });
     }
   };
-  // btnCreate.disabled=true;
-form.reset()
+ form.reset()
 }
 
-  // /location.reload();
 
 
 
